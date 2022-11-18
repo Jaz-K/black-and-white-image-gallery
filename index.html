@@ -16,9 +16,13 @@
         <h1>{{ headline }}</h1>
         <section>
             <form @submit.prevent.default="handleSubmit">
-                <label for="title"></label>
+                <label for="title">Title</label>
                 <input v-model="title" type="text" name="title" id="title" placeholder="Title">
-                <input type="file" name="file" id="file" accept="image/*" @change="handleChange">
+                <label for="title">Username</label>
+                <input v-model="username" type="text" name="username" id="username" placeholder="Username">
+                <label for="title">Description</label>
+                <input v-model="description" type="text" name="description" id="description" placeholder="Description">
+                <input type="file" name="image" id="image" accept="image/*" @change="handleChange">
                 <button>Submit</button>
             </form>
         </section>

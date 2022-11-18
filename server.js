@@ -2,11 +2,15 @@ const path = require("path");
 const express = require("express");
 const multer = require("multer");
 const uidSafe = require("uid-safe");
+require("dotenv").config();
+// const uploader = require("./upload");
+const { AWS_BUCKET } = process.env;
+const s3upload = require("./s3");
 
 const app = express();
-require("dotenv").config();
+
 const { PORT = 8080 } = process.env;
-const { getImages } = require("./db");
+const { getImages, addImage } = require("./db");
 
 const diskStorage = multer.diskStorage({
     destination: function (req, file, callback) {
@@ -37,13 +41,14 @@ app.get("/api/images", async (req, res) => {
     res.json(images);
 });
 
-app.post("/upload", uploader.single("file"), (req, res) => {
+app.post("/upload", uploader.single("image"), s3upload, async (req, res) => {
     console.log("req.body: ", req.body);
-    console.log("req.file: ", req.file);
+    // console.log("req.image: ", req.image);
+    const url = `https://s3.amazonaws.com/${AWS_BUCKET}/${req.file.filename}`;
+    const image = await addImage({ url, ...req.body });
+
     if (req.file) {
-        res.json({
-            success: true,
-        });
+        res.json(image);
     } else {
         res.json({
             success: false,

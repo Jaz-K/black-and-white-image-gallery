@@ -22,7 +22,7 @@ async function addImage({ url, username, title, description }) {
     const result = await db.query(
         `
     INSERT INTO images(url, username, title, description) 
-    VALUES (1$,2$,3$,$4)
+    VALUES ($1,$2,$3,$4)
     RETURNING *
     `,
         [url, username, title, description]

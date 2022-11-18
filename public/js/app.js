@@ -5,7 +5,9 @@ Vue.createApp({
         return {
             images: [],
             title: "",
-            file: null,
+            username: "",
+            description: "",
+            image: null,
             headline: "This is a gallery",
         };
     },
@@ -19,23 +21,30 @@ Vue.createApp({
     },
     methods: {
         handleChange(event) {
+            event.preventDefault();
             console.log("handle change is running");
-            this.file = event.target.files[0];
+            this.image = event.target.files[0];
+        },
+        async handleSubmit(event) {
+            console.log("handle submit is running");
+            console.log("this....: ", this.title);
+
+            event.preventDefault();
+
+            const formData = new FormData();
+            formData.append("image", this.image);
+            formData.append("title", this.title);
+            formData.append("username", this.username);
+            formData.append("description", this.description);
+
+            const response = await fetch("/upload", {
+                method: "POST",
+                body: formData,
+            });
+            const newImage = await response.json();
+            console.log("thhis images", this.images);
+            console.log("new image", newImage);
+            this.images = [newImage, ...this.images];
         },
     },
-    handleSubmit(event) {
-        console.log("handle submit is running");
-        console.log("this.title: ", this.title);
-
-        event.preventDefault();
-
-        const formData = new FormData();
-        formData.append("file", this.file);
-        formData.append("title", this.title);
-
-        fetch("/upload", {
-            method: "POST",
-            body: formData,
-        });
-    },
-}).mount("#main"); // cann be a class element or id
+}).mount("#main"); // can be a class element or id
