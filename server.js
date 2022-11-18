@@ -38,8 +38,8 @@ app.get("/api/images", async (req, res) => {
 });
 
 app.post("/upload", uploader.single("file"), (req, res) => {
-    console.log("req.body", res.body);
-    console.log("req.file", res.file);
+    console.log("req.body: ", req.body);
+    console.log("req.file: ", req.file);
     if (req.file) {
         res.json({
             success: true,
