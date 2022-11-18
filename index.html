@@ -9,16 +9,29 @@
 </head>
 
 <body>
-    <div id="main">
+    <header>
+        <img class="logo" src="/assets/blackandwhitelogo.svg" alt="beauty in black and white">
+    </header>
+    <main id="main">
         <h1>{{ headline }}</h1>
-        <ul>
-            <li v-for="image of images">
-                <img v-bind:src="image.url" alt="">
-                {{image.title}}
-            </li>
-        </ul>
+        <section>
+            <form @submit.prevent.default="handleSubmit">
+                <label for="title"></label>
+                <input v-model="title" type="text" name="title" id="title" placeholder="Title">
+                <input type="file" name="file" id="file" accept="image/*" @change="handleChange">
+                <button>Submit</button>
+            </form>
+        </section>
+        <section>
+            <ul>
+                <li v-for="image of images">
+                    <img v-bind:src="image.url" class="imageGallery" alt="">
+                    {{image.title}}
+                </li>
+            </ul>
+        </section>
         <!-- <div> <img v-if="image of images" v-bind:src="" alt=""></div> -->
-    </div>
+    </main>
     <script src="/js/app.js" type="module" crossorigin="use-credentials"></script>
 </body>
 

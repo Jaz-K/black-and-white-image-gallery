@@ -16,6 +16,21 @@ async function getImages() {
     return result.rows;
 }
 
+// add image to db
+
+async function addImage({ url, username, title, description }) {
+    const result = await db.query(
+        `
+    INSERT INTO images(url, username, title, description) 
+    VALUES (1$,2$,3$,$4)
+    RETURNING *
+    `,
+        [url, username, title, description]
+    );
+    return result.rows[0];
+}
+
 module.exports = {
     getImages,
+    addImage,
 };

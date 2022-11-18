@@ -3,8 +3,10 @@ import * as Vue from "./vue.js";
 Vue.createApp({
     data: function () {
         return {
-            headline: "This is a gallery",
             images: [],
+            title: "",
+            file: null,
+            headline: "This is a gallery",
         };
     },
     mounted: async function () {
@@ -15,4 +17,25 @@ Vue.createApp({
         this.images = data;
         // console.log("user", this.images);
     },
-}).mount("#main");
+    methods: {
+        handleChange(event) {
+            console.log("handle change is running");
+            this.file = event.target.files[0];
+        },
+    },
+    handleSubmit(event) {
+        console.log("handle submit is running");
+        console.log("this.title: ", this.title);
+
+        event.preventDefault();
+
+        const formData = new FormData();
+        formData.append("file", this.file);
+        formData.append("title", this.title);
+
+        fetch("/upload", {
+            method: "POST",
+            body: formData,
+        });
+    },
+}).mount("#main"); // cann be a class element or id
