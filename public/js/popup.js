@@ -26,11 +26,21 @@ const Popup = {
     },
     template: `
         <div class="popup">
-            <h1>{{ image.title }}</h1>
-            <h2>Posted by {{ image.username }}</h2>
-            <img :src="image.url"/>
-            <button @click="handleCloseClick">X</button>
-        </div>`,
+            <button @click="handleCloseClick" class="closeButton mobileButton">×</button>
+            <section>
+                <img :src="image.url" class="bw-img"/>
+            </section>
+            <section>
+                <button @click="handleCloseClick" class="closeButton desktopButton">×</button>
+                <h2>{{ image.title }}</h2>
+                <h3>Posted by {{ image.username }}</h3>
+                <h4>Created at: {{ image.created_at }}</h4>
+                <p>Description:</p>
+                <p>{{ image.description}}</p>
+            </section>
+        </div>
+        
+        `,
 };
 
 export default Popup;

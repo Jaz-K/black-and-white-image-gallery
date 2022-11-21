@@ -31,15 +31,18 @@
                     <input v-model="description" type="text" name="description" id="description"
                         placeholder="Description">
                 </div>
-
-                <input type="file" name="image" id="image" accept="image/*" @change="handleChange">
-                <button>Submit</button>
+                <div>
+                    <input type="file" name="image" id="image" accept="image/*" @change="handleChange"
+                        class="inputfile">
+                    <label for="image">Choose a file</label>
+                    <button>Submit</button>
+                </div>
             </form>
         </section>
         <section>
             <ul>
                 <li v-for="image of images" key="image.id" @click="handleImageClick(image.id)">
-                    <img v-bind:src="image.url" class="imageGallery" :alt="image.title">
+                    <img v-bind:src="image.url" class="imageGallery bw-img" :alt="image.title">
 
                     {{image.title}}
                 </li>
@@ -47,7 +50,9 @@
         </section>
         <!-- <div> <img v-if="image of images" v-bind:src="" alt=""></div> -->
     </main>
+    <script src="/js/input.js"></script>
     <script src="/js/app.js" type="module" crossorigin="use-credentials"></script>
+
 </body>
 
 </html>
