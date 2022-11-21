@@ -13,23 +13,34 @@
         <img class="logo" src="/assets/blackandwhitelogo.svg" alt="beauty in black and white">
     </header>
     <main id="main">
+        <popup v-if="selectedImageId" :id="selectedImageId" @close="handleClosePopup"></popup>
+
         <h1>{{ headline }}</h1>
         <section>
             <form @submit.prevent.default="handleSubmit">
-                <label for="title">Title</label>
-                <input v-model="title" type="text" name="title" id="title" placeholder="Title">
-                <label for="title">Username</label>
-                <input v-model="username" type="text" name="username" id="username" placeholder="Username">
-                <label for="title">Description</label>
-                <input v-model="description" type="text" name="description" id="description" placeholder="Description">
+                <div>
+                    <label for="title">Title</label>
+                    <input v-model="title" type="text" name="title" id="title" placeholder="Title">
+                </div>
+                <div>
+                    <label for="title">Username</label>
+                    <input v-model="username" type="text" name="username" id="username" placeholder="Username">
+                </div>
+                <div>
+                    <label for="title">Description</label>
+                    <input v-model="description" type="text" name="description" id="description"
+                        placeholder="Description">
+                </div>
+
                 <input type="file" name="image" id="image" accept="image/*" @change="handleChange">
                 <button>Submit</button>
             </form>
         </section>
         <section>
             <ul>
-                <li v-for="image of images">
-                    <img v-bind:src="image.url" class="imageGallery" alt="">
+                <li v-for="image of images" key="image.id" @click="handleImageClick(image.id)">
+                    <img v-bind:src="image.url" class="imageGallery" :alt="image.title">
+
                     {{image.title}}
                 </li>
             </ul>

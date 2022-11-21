@@ -10,7 +10,7 @@ const s3upload = require("./s3");
 const app = express();
 
 const { PORT = 8080 } = process.env;
-const { getImages, addImage } = require("./db");
+const { getImages, addImage, getImageById } = require("./db");
 
 const diskStorage = multer.diskStorage({
     destination: function (req, file, callback) {
@@ -43,7 +43,7 @@ app.get("/api/images", async (req, res) => {
 
 app.post("/upload", uploader.single("image"), s3upload, async (req, res) => {
     console.log("req.body: ", req.body);
-    // console.log("req.image: ", req.image);
+    // console.log("req.file: ", req.file);
     const url = `https://s3.amazonaws.com/${AWS_BUCKET}/${req.file.filename}`;
     const image = await addImage({ url, ...req.body });
 
@@ -55,6 +55,21 @@ app.post("/upload", uploader.single("image"), s3upload, async (req, res) => {
         });
     }
 });
+
+// images by ID
+app.get("/api/:id", async (req, res) => {
+    console.log("req params", req.params);
+    const id = req.params.id;
+    const image = await getImageById(id);
+    res.json(image);
+    console.log("image", image);
+});
+
+// DELETE from AWS
+
+/* app.post("/delete", async (req, res) => {
+
+}) */
 
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "index.html"));

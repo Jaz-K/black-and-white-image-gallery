@@ -1,6 +1,10 @@
 import * as Vue from "./vue.js";
+import Popup from "./popup.js";
 
 Vue.createApp({
+    components: {
+        popup: Popup,
+    },
     data: function () {
         return {
             images: [],
@@ -8,6 +12,7 @@ Vue.createApp({
             username: "",
             description: "",
             image: null,
+            selectedImageId: null,
             headline: "This is a gallery",
         };
     },
@@ -20,15 +25,23 @@ Vue.createApp({
         // console.log("user", this.images);
     },
     methods: {
+        handleClosePopup() {
+            this.selectedImageId = null;
+        },
+        handleImageClick(image) {
+            console.log("handle CLick test", image);
+            this.selectedImageId = image;
+            // this.$router.push({ path: this.selectedImageId });
+            // this.selectedImageId = !this.selectedImageId;
+        },
         handleChange(event) {
             event.preventDefault();
             console.log("handle change is running");
             this.image = event.target.files[0];
         },
         async handleSubmit(event) {
-            console.log("handle submit is running");
-            console.log("this....: ", this.title);
-
+            // console.log("handle submit is running");
+            // console.log("this....: ", this.title);
             event.preventDefault();
 
             const formData = new FormData();
@@ -42,8 +55,6 @@ Vue.createApp({
                 body: formData,
             });
             const newImage = await response.json();
-            console.log("thhis images", this.images);
-            console.log("new image", newImage);
             this.images = [newImage, ...this.images];
         },
     },

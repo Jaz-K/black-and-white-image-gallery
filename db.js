@@ -16,6 +16,18 @@ async function getImages() {
     return result.rows;
 }
 
+// get image by ID
+
+async function getImageById(id) {
+    const result = await db.query(
+        `
+    SELECT * FROM images
+    WHERE id = $1
+    `,
+        [id]
+    );
+    return result.rows[0];
+}
 // add image to db
 
 async function addImage({ url, username, title, description }) {
@@ -32,5 +44,6 @@ async function addImage({ url, username, title, description }) {
 
 module.exports = {
     getImages,
+    getImageById,
     addImage,
 };
