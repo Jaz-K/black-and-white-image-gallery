@@ -14,6 +14,7 @@ Vue.createApp({
             image: null,
             selectedImageId: null,
             headline: "This is a gallery",
+            button: true,
         };
     },
     mounted: async function () {
@@ -26,18 +27,17 @@ Vue.createApp({
     },
     methods: {
         async handleMoreImages() {
-            // console.log("this.data before", this.images);
             const lastImage = this.images[this.images.length - 1].id;
             const response = await fetch("/api/loadImages/" + lastImage);
-            // console.log("The more button clicked");
             const data = await response.json();
-            // console.log("data", data);
+
             data.forEach((image) => {
                 this.images.push(image);
                 console.log("image for Each", image);
             });
             if (this.images.find((image) => image.id === lastImage)) {
                 console.log("I found the match");
+                this.button = false;
             }
         },
         handleClosePopup() {
@@ -46,8 +46,6 @@ Vue.createApp({
         handleImageClick(image) {
             console.log("handle CLick test", image);
             this.selectedImageId = image;
-            // this.$router.push({ path: this.selectedImageId });
-            // this.selectedImageId = !this.selectedImageId;
         },
         handleChange(event) {
             event.preventDefault();

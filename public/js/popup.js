@@ -29,24 +29,24 @@ const Popup = {
         },
     },
     template: `
-        <div class="popup">
+        <div class="popup ">
             <button @click="handleCloseClick" class="closeButton mobileButton">×</button>
-            <section>
-                <img :src="image.url" class="bw-img"/>
-            </section>
-            <section>
-                <button @click="handleCloseClick" class="closeButton desktopButton">×</button>
-                <h2>{{ image.title }}</h2>
-                <h3>Posted by {{ image.username }}</h3>
-                <h4>Created at: {{ image.created_at }}</h4>
-                <p>Description:</p>
-                <p>{{ image.description}}</p>
-                <comments :id="imageId"></comments>
-            </section>
-            
+            <div class="infos">
+                <section>
+                    <img :src="image.url" class="bw-img"/>
+                </section>
+                <section>
+                    <button @click="handleCloseClick" class="closeButton desktopButton">×</button>
+                    <h2>{{ image.title }}</h2>
+                    <h3>Posted by: {{ image.username }}</h3>
+
+                    <p>Description: {{ image.description}}</p>
+                    <comments :id="imageId"></comments>
+                </section>
+            </div>
         </div>
         
         `,
 };
-
+//                     <h4>Created at: {{ image.created_at }}</h4>
 export default Popup;

@@ -38,16 +38,20 @@ const Comments = {
     template: `
     <h2>Add a comment</h2>
     <form @submit.prevent.default="handleSubmitComment">
-        <label for="username">Comments</label>
-        <input v-model="username" type="text" name="username" id="username" placeholder="User Name" maxlength="15">
-        <label for="comment">Comments</label>
-        <input v-model="comment" type="text" name="comment" id="comment" placeholder="Comment" maxlength="30">
+        <div>
+        <label for="username">Usernames</label>
+        <input v-model="username" type="text" name="username" id="username" maxlength="15">
+        </div>
+        <div>
+        <label for="comment">Comment</label>
+        <input v-model="comment" type="text" name="comment" id="comment" maxlength="30">
+        </div>
         <button type="submit">Submit</button>
     </form>
     <ul class="comments">
         <li v-for="comment of comments">
             <h4>{{comment.username}} says:</h4>
-            <p>{{comment.comment}}</p>
+            <p class="comment">{{comment.comment}}</p>
         </li>
     </ul>
     `,

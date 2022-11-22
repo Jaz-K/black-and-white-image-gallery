@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    let single = "Datei Ausgewählt";
+    let single = "One file choosed";
 
     fileUploadStyling(single);
 });
@@ -29,8 +29,9 @@ function fileUploadStyling(single) {
     inputFile.addEventListener("change", function () {
         let label = this.nextElementSibling;
 
-        label.innerHTML =
-            this.files[0].name.slice(0, 10) + "..." + " " + single;
+        label.innerHTML = `🖼 ${single}`;
+        // this.files[0].name.slice(0, 10) + "..." + " " + single;
+        // this.files[0].name.slice(0, 10) + "..." + " " + single;
     });
 }
 
