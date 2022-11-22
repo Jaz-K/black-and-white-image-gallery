@@ -31,7 +31,7 @@ const Comments = {
         <button type="submit">Submit</button>
     </form>
     <ul class="comments">
-        <li v-for="comment in comments">
+        <li v-for="comment of comments">
             <h4>{{comment.username}}</h4>
             <p>{{comment.comment}}</p>
         </li>

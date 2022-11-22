@@ -15,7 +15,7 @@
     </header>
     <main id="main">
         <popup v-if="selectedImageId" :id="selectedImageId" @close="handleClosePopup"></popup>
-
+        <!-- <comments :id="selectedImageId"></comments> -->
         <h1>{{ headline }}</h1>
         <section>
             <form @submit.prevent.default="handleSubmit">

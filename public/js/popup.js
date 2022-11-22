@@ -40,7 +40,6 @@ const Popup = {
             </section>
         </div>
         <comments :id="imageId"></comments>
-        
         `,
 };
 
