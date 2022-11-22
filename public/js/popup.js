@@ -1,8 +1,12 @@
+import Comments from "./comments.js";
 const Popup = {
+    components: {
+        comments: Comments,
+    },
     data() {
         return {
             image: [],
-            imageId: null,
+            imageId: this.id,
         };
     },
 
@@ -12,8 +16,8 @@ const Popup = {
         },
     },
     mounted: async function () {
-        console.log("fetch ID", this.id);
-        this.imageId = this.id;
+        // console.log("fetch ID", this.id);
+        // console.log("imageId", this.imageId);
         const response = await fetch("/api/" + this.id);
         const data = await response.json();
         this.image = data;
@@ -37,9 +41,11 @@ const Popup = {
                 <h4>Created at: {{ image.created_at }}</h4>
                 <p>Description:</p>
                 <p>{{ image.description}}</p>
+                <comments :id="imageId"></comments>
             </section>
+            
         </div>
-        <comments :id="imageId"></comments>
+        
         `,
 };
 

@@ -21,6 +21,9 @@ main#main {
     max-width: 1380px;
     flex: 1;
 }
+section.comments {
+    z-index: 2;
+}
 
 h1 {
     font-family: "caviar_dreamsregular", sans-serif;

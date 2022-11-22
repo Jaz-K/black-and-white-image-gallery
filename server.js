@@ -15,7 +15,7 @@ const {
     addImage,
     getImageById,
     getCommentsById,
-    // addComment,
+    addComment,
 } = require("./db");
 
 const diskStorage = multer.diskStorage({
@@ -80,9 +80,12 @@ app.get("/api/comments/:id", async (req, res) => {
 });
 
 // add comment
-/* app.post("/api/comment", (req, res) => {
+app.post("/api/comment", async (req, res) => {
     console.log("this is a post request");
-}); */
+    console.log("req.body", req.body);
+    await addComment({ ...req.body });
+    res.status(200).end();
+});
 
 // DELETE from AWS
 

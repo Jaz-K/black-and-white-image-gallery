@@ -47,7 +47,7 @@ async function addImage({ url, username, title, description }) {
 async function addComment({ username, comment, image_id }) {
     const result = await db.query(
         `
-    INSERT INTO(username, comment, image_id)
+    INSERT INTO comments(username, comment, image_id)
     VALUES($1,$2,$3)
     RETURNING *
     `,
@@ -66,6 +66,10 @@ async function getCommentsById(image_id) {
     );
     return result.rows;
 }
+
+/* async function loadImagesByClick(){
+    const result = await db.query
+} */
 
 module.exports = {
     getImages,

@@ -1,11 +1,9 @@
 import * as Vue from "./vue.js";
 import Popup from "./popup.js";
-import Comments from "./comments.js";
 
 Vue.createApp({
     components: {
         popup: Popup,
-        comments: Comments,
     },
     data: function () {
         return {
