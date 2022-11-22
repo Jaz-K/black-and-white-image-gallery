@@ -20,11 +20,26 @@ Vue.createApp({
         // console.log("mounted check");
         const response = await fetch("/api/images");
         const data = await response.json();
-        // console.log("image data", data);
+        console.log("image data first load", data);
         this.images = data;
         // console.log("user", this.images);
     },
     methods: {
+        async handleMoreImages() {
+            // console.log("this.data before", this.images);
+            const lastImage = this.images[this.images.length - 1].id;
+            const response = await fetch("/api/loadImages/" + lastImage);
+            // console.log("The more button clicked");
+            const data = await response.json();
+            // console.log("data", data);
+            data.forEach((image) => {
+                this.images.push(image);
+                console.log("image for Each", image);
+            });
+            if (this.images.find((image) => image.id === lastImage)) {
+                console.log("I found the match");
+            }
+        },
         handleClosePopup() {
             this.selectedImageId = null;
         },

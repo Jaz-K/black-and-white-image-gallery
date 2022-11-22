@@ -21,20 +21,20 @@
             <form @submit.prevent.default="handleSubmit">
                 <div>
                     <label for="title">Title</label>
-                    <input v-model="title" type="text" name="title" id="title" placeholder="Title">
+                    <input v-model="title" type="text" name="title" id="title" placeholder="Title" required>
                 </div>
                 <div>
-                    <label for="title">Username</label>
-                    <input v-model="username" type="text" name="username" id="username" placeholder="Username">
+                    <label for="username">Username</label>
+                    <input v-model="username" type="text" name="username" id="username" placeholder="Username" required>
                 </div>
                 <div>
-                    <label for="title">Description</label>
+                    <label for="description">Description</label>
                     <input v-model="description" type="text" name="description" id="description"
-                        placeholder="Description">
+                        placeholder="Description" required>
                 </div>
                 <div>
-                    <input type="file" name="image" id="image" accept="image/*" @change="handleChange"
-                        class="inputfile">
+                    <input type="file" name="image" id="image" accept="image/*" @change="handleChange" class="inputfile"
+                        required>
                     <label for="image">Choose a file</label>
                     <button>Submit</button>
                 </div>
@@ -48,6 +48,9 @@
                     {{image.title}}
                 </li>
             </ul>
+            <div>
+                <button @click="handleMoreImages">load more</button>
+            </div>
         </section>
         <!-- <div> <img v-if="image of images" v-bind:src="" alt=""></div> -->
     </main>

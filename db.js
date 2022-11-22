@@ -67,9 +67,22 @@ async function getCommentsById(image_id) {
     return result.rows;
 }
 
-/* async function loadImagesByClick(){
-    const result = await db.query
-} */
+async function loadImagesByClick(id) {
+    const result = await db.query(
+        `
+    SELECT id, title, url,(
+      SELECT id FROM images
+      ORDER BY id ASC
+      LIMIT 1
+  ) AS "lowestId" FROM images
+  WHERE id < $1
+  ORDER BY id DESC
+  LIMIT 8;
+    `,
+        [id]
+    );
+    return result.rows;
+}
 
 module.exports = {
     getImages,
@@ -77,4 +90,5 @@ module.exports = {
     addImage,
     getCommentsById,
     addComment,
+    loadImagesByClick,
 };
