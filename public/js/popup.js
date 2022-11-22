@@ -2,6 +2,7 @@ const Popup = {
     data() {
         return {
             image: [],
+            imageId: null,
         };
     },
 
@@ -12,8 +13,7 @@ const Popup = {
     },
     mounted: async function () {
         console.log("fetch ID", this.id);
-        // const id = this.id;
-
+        this.imageId = this.id;
         const response = await fetch("/api/" + this.id);
         const data = await response.json();
         this.image = data;
@@ -38,9 +38,8 @@ const Popup = {
                 <p>Description:</p>
                 <p>{{ image.description}}</p>
             </section>
-            
-            <comments></comments>
         </div>
+        <comments :id="imageId"></comments>
         
         `,
 };

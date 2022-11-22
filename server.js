@@ -48,7 +48,7 @@ app.get("/api/images", async (req, res) => {
 });
 
 app.post("/upload", uploader.single("image"), s3upload, async (req, res) => {
-    console.log("req.body: ", req.body);
+    // console.log("req.body: ", req.body);
     // console.log("req.file: ", req.file);
     const url = `https://s3.amazonaws.com/${AWS_BUCKET}/${req.file.filename}`;
     const image = await addImage({ url, ...req.body });
@@ -64,22 +64,25 @@ app.post("/upload", uploader.single("image"), s3upload, async (req, res) => {
 
 // images by ID
 app.get("/api/:id", async (req, res) => {
-    console.log("req params", req.params);
+    // console.log("req params", req.params);
     const id = req.params.id;
     const image = await getImageById(id);
     res.json(image);
-    console.log("image", image);
+    // console.log("image", image);
 });
 
 // comments by ID
 app.get("/api/comments/:id", async (req, res) => {
-    console.log("GET request comments" getCommentsById(1));
+    const id = req.params.id;
+    const comments = await getCommentsById(id);
+    res.json(comments);
+    console.log("GET request comments", comments);
 });
 
 // add comment
-app.post("/api/comment", (req, res) => {
+/* app.post("/api/comment", (req, res) => {
     console.log("this is a post request");
-});
+}); */
 
 // DELETE from AWS
 
