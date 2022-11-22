@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
 function fileUploadStyling(single) {
     let input = document.querySelector("input[type=file]");
 
-    var inputFile = input;
+    const inputFile = input;
     inputFile.addEventListener("change", function () {
         let label = this.nextElementSibling;
 
@@ -33,3 +33,9 @@ function fileUploadStyling(single) {
             this.files[0].name.slice(0, 10) + "..." + " " + single;
     });
 }
+
+// toggle
+
+const toggle = document.querySelector(".switch");
+
+toggle.addEventListener("click", () => console.log("toggle click")); // here add darktheme );

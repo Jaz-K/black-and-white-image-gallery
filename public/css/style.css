@@ -1,3 +1,5 @@
+@import "fonts.css";
+
 * {
     margin: 0;
     padding: 0;
@@ -21,6 +23,7 @@ main#main {
 }
 
 h1 {
+    font-family: "caviar_dreamsregular", sans-serif;
     font-size: 40px;
     margin-bottom: 40px;
 }
@@ -167,6 +170,55 @@ div.popup {
     outline: -webkit-focus-ring-color auto 5px;
 }
 
+/* Toggle */
+
+input[type="checkbox"].switch {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+}
+
+label.toggle {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 50px;
+    height: 30px;
+    background: grey;
+    display: block;
+    border-radius: 100px;
+    position: relative;
+}
+
+label.toggle:after {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 90px;
+    /* transition: 0.3s; */
+}
+
+input.switch:checked + label {
+    background: #ffffff;
+    border: 1px solid #000;
+}
+
+input.switch:checked + label:after {
+    left: calc(100% - 5px);
+    transform: translateX(-100%);
+    background-color: transparent;
+    box-shadow: 6px 6px #000;
+    top: -2px;
+    left: 38px;
+}
+
+/* label.toggle:active:after {
+    width: 30px;
+} */
+
 @media screen and (max-width: 1200px) {
 }
 @media screen and (max-width: 992px) {
@@ -231,3 +283,9 @@ div.popup {
         width: 100%;
     }
 }
+
+/* @media (prefers-color-scheme: dark) {
+    body {
+        background-color: rgb(28, 28, 39);
+    }
+} */

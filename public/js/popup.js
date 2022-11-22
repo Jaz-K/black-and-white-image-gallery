@@ -38,6 +38,8 @@ const Popup = {
                 <p>Description:</p>
                 <p>{{ image.description}}</p>
             </section>
+            
+            <comments></comments>
         </div>
         
         `,

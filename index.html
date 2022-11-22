@@ -11,6 +11,7 @@
 <body>
     <header>
         <img class="logo" src="/assets/blackandwhitelogo.svg" alt="beauty in black and white">
+        <input type="checkbox" id="switch" class="switch" /><label for="switch" class="toggle">Toggle</label>
     </header>
     <main id="main">
         <popup v-if="selectedImageId" :id="selectedImageId" @close="handleClosePopup"></popup>

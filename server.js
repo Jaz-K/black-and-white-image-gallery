@@ -10,7 +10,13 @@ const s3upload = require("./s3");
 const app = express();
 
 const { PORT = 8080 } = process.env;
-const { getImages, addImage, getImageById } = require("./db");
+const {
+    getImages,
+    addImage,
+    getImageById,
+    getCommentsById,
+    // addComment,
+} = require("./db");
 
 const diskStorage = multer.diskStorage({
     destination: function (req, file, callback) {
@@ -63,6 +69,16 @@ app.get("/api/:id", async (req, res) => {
     const image = await getImageById(id);
     res.json(image);
     console.log("image", image);
+});
+
+// comments by ID
+app.get("/api/comments/:id", async (req, res) => {
+    console.log("GET request comments" getCommentsById(1));
+});
+
+// add comment
+app.post("/api/comment", (req, res) => {
+    console.log("this is a post request");
 });
 
 // DELETE from AWS

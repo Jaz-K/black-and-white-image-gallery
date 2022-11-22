@@ -12,6 +12,8 @@ const db = spicedPg(
 async function getImages() {
     const result = await db.query(`
     SELECT * FROM images
+    ORDER BY id DESC
+    LIMIT 4
     `);
     return result.rows;
 }
@@ -42,8 +44,33 @@ async function addImage({ url, username, title, description }) {
     return result.rows[0];
 }
 
+async function addComment({ username, comment, image_id }) {
+    const result = await db.query(
+        `
+    INSERT INTO(username, comment, image_id)
+    VALUES($1,$2,$3)
+    RETURNING *
+    `,
+        [username, comment, image_id]
+    );
+    return result.rows[0];
+}
+
+async function getCommentsById(image_id) {
+    const result = await db.query(
+        `
+    SELECT * FROM comments
+    WHERE image_id = $1
+    `,
+        [image_id]
+    );
+    return result.rows;
+}
+
 module.exports = {
     getImages,
     getImageById,
     addImage,
+    getCommentsById,
+    addComment,
 };
