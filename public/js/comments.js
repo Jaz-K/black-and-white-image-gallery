@@ -19,10 +19,10 @@ const Comments = {
         console.log("comments", this.comments);
     },
     methods: {
-        handleSubmitComment(event) {
+        async handleSubmitComment(event) {
             console.log("its submits!");
             event.preventDefault;
-            fetch("/api/comment", {
+            const response = await fetch("/api/comment", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -33,6 +33,11 @@ const Comments = {
                     image_id: this.id,
                 }),
             });
+            const newComment = await response.json();
+            this.comments = [newComment, ...this.comments];
+
+            this.comment = "";
+            this.username = "";
         },
     },
     template: `
@@ -46,10 +51,10 @@ const Comments = {
         <label for="comment">Comment</label>
         <input v-model="comment" type="text" name="comment" id="comment" maxlength="30">
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" class="btn-style">Submit</button>
     </form>
     <ul class="comments">
-        <li v-for="comment of comments">
+        <li v-for="comment of comments" class="comments">
             <h4>{{comment.username}} says:</h4>
             <p class="comment">{{comment.comment}}</p>
         </li>

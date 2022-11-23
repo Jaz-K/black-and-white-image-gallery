@@ -18,7 +18,7 @@
         </popup>
 
         <section>
-            <form @submit.prevent.default="handleSubmit">
+            <form @submit.prevent.default="handleSubmit" ref="imageForm">
                 <div>
                     <label for="title">Title</label>
                     <input v-model="title" type="text" name="title" id="title" required maxlength="20">
@@ -32,23 +32,23 @@
                     <input v-model="description" type="text" name="description" id="description" maxlength="40">
                 </div>
 
-                <input type="file" name="image" id="image" accept="image/*" @change="handleChange" class="inputfile"
-                    required>
+                <input type="file" name="image" id="image" accept="image/*" @change="handleChange"
+                    class="inputfile btn-style" required>
                 <label for="image">Choose a file</label>
-                <button>Submit</button>
+                <button class="btn-style">Submit</button>
 
             </form>
         </section>
         <section>
             <ul>
-                <li v-for="image of images" key="image.id" @click="handleImageClick(image.id)">
+                <li v-for="image of images" key="image.id" @click="handleImageClick(image.id)" class="imageList">
                     <img v-bind:src="image.url" class="imageGallery bw-img" :alt="image.title">
                     {{image.title}}
                 </li>
             </ul>
             <i class="fa-regular fa-trash-can"></i>
             <div class="loadMore">
-                <button v-if="button" @click="handleMoreImages">load more</button>
+                <button v-if="button" @click="handleMoreImages" class="btn-style">load more</button>
             </div>
         </section>
         <!-- <div> <img v-if="image of images" v-bind:src="" alt=""></div> -->

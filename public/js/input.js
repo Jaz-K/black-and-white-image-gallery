@@ -25,12 +25,12 @@ document.addEventListener("DOMContentLoaded", function () {
 function fileUploadStyling(single) {
     let input = document.querySelector("input[type=file]");
 
-    const inputFile = input;
+    let inputFile = input;
     inputFile.addEventListener("change", function () {
         let label = this.nextElementSibling;
-
-        label.innerHTML = `🖼 ${single}`;
-        // this.files[0].name.slice(0, 10) + "..." + " " + single;
-        // this.files[0].name.slice(0, 10) + "..." + " " + single;
+        label.innerHTML = `${single}`;
+        /*         if (inputFile === "") {
+            label.innerHTML = "Choose a file";
+        } */
     });
 }

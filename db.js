@@ -77,7 +77,7 @@ async function loadImagesByClick(id) {
   ) AS "lowestId" FROM images
   WHERE id < $1
   ORDER BY id DESC
-  LIMIT 8;
+  LIMIT 4;
     `,
         [id]
     );

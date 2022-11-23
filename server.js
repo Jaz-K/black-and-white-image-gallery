@@ -44,9 +44,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.get("/api/images", async (req, res) => {
-    // console.log("this is getting called");
     const images = await getImages();
-    // console.log("images", images);
     res.json(images);
 });
 
@@ -55,8 +53,6 @@ app.post(
     uploader.single("image"),
     s3upload,
     async (req, res) => {
-        // console.log("req.body: ", req.body);
-        // console.log("req.file: ", req.file);
         const url = `https://s3.amazonaws.com/${AWS_BUCKET}/${req.file.filename}`;
         const image = await addImage({ url, ...req.body });
 
@@ -82,22 +78,18 @@ app.get("/api/comments/:id", async (req, res) => {
     const id = req.params.id;
     const comments = await getCommentsById(id);
     res.json(comments);
-    console.log("GET request comments", comments);
 });
 
 // add comment
 app.post("/api/comment", async (req, res) => {
-    await addComment({ ...req.body });
-    res.status(200).end();
+    const newComment = await addComment({ ...req.body });
+    res.json(newComment);
 });
 
 //pagination
 app.get("/api/loadImages/:lastImageId", async (req, res) => {
     const id = req.params.lastImageId;
-    // console.log("reqest", req);
-    console.log("reqest", id);
     const images = await loadImagesByClick(id);
-    console.log("images", images);
     res.json(images);
 });
 
@@ -105,7 +97,6 @@ app.get("/api/loadImages/:lastImageId", async (req, res) => {
 
 app.post("/api/delete", async (req, res) => {
     try {
-        console.log("relete body", req.body);
         const { fileName, image_id } = req.body;
         await deleteImage(image_id);
         await deleteComments(image_id);

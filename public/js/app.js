@@ -21,21 +21,22 @@ Vue.createApp({
         const response = await fetch("/api/images");
         const data = await response.json();
         this.images = data;
+        this.imageId = window.location.hash.slice(1);
     },
     methods: {
         async handleMoreImages() {
             const lastImage = this.images[this.images.length - 1].id;
+
             const response = await fetch("/api/loadImages/" + lastImage);
             const data = await response.json();
+            console.log("data", data);
 
-            data.forEach((image) => {
-                this.images.push(image);
-                console.log("image for Each", image);
-            });
-            if (this.images.find((image) => image.id === lastImage)) {
-                console.log("I found the match");
+            if (data.id == data.lowestId) {
+                console.log(data);
+
                 this.button = false;
             }
+            this.images = [...this.images, ...data];
         },
         handleDeleteImage(imageId) {
             this.images = this.images.filter((x) => x.id !== imageId);
@@ -51,7 +52,6 @@ Vue.createApp({
         },
         handleChange(event) {
             event.preventDefault();
-            console.log("handle change is running");
             this.image = event.target.files[0];
         },
         async handleSubmit(event) {
@@ -71,6 +71,12 @@ Vue.createApp({
             });
             const newImage = await response.json();
             this.images = [newImage, ...this.images];
+
+            // reset form
+            this.title = "";
+            this.username = "";
+            this.description = "";
+            this.image = null;
         },
     },
 }).mount("#main"); // can be a class element or id
