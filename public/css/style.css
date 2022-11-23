@@ -10,6 +10,9 @@ html {
     font-family: "droid_serifregular", "Times New Roman", Times, serif;
     font-size: 16px;
 }
+/* body {
+    background-color: rgb(34, 34, 34);
+} */
 header {
     max-width: 1340px;
     margin: 0 auto;
@@ -21,6 +24,7 @@ main#main {
     max-width: 1380px;
     flex: 1;
 }
+
 section.comments {
     z-index: 2;
 }
@@ -52,9 +56,6 @@ img.logo {
 }
 
 img.imageGallery {
-    /*     max-width: 25rem;
-    max-height: 25rem; */
-    /* max-width: 25rem; */
     aspect-ratio: 1/1;
     object-fit: cover;
     margin-bottom: 10px;
@@ -67,9 +68,6 @@ ul {
     grid-template-rows: auto;
     gap: 4% 2%;
     margin-bottom: 4rem;
-    /*     display: flex;
-    gap: 20px;
-    flex-wrap: wrap; */
 }
 li {
     display: flex;
@@ -97,11 +95,9 @@ form {
 }
 
 form div {
-    /* display: inline-block;
-    margin-bottom: 1rem; */
     display: flex;
     flex-direction: column;
-    margin-right: 1rem;
+    justify-content: center;
 }
 
 form input {
@@ -118,11 +114,9 @@ form input:focus-visible {
 form label {
     font-size: 0.75rem;
     font-weight: 600;
-    margin-right: 0.5rem;
 }
 
-form button,
-button {
+form button {
     font-family: inherit;
     padding: 5px 20px;
     border: none;
@@ -144,9 +138,6 @@ div.popup {
     inset: 0;
     z-index: 1;
     overflow-y: scroll;
-    /* display: flex;
-    gap: 2rem;
-    flex-wrap: wrap; */
 }
 div.popup .infos {
     margin: 0 auto;
@@ -158,7 +149,6 @@ div.popup .infos {
 }
 
 .popup img {
-    /* max-width: 40rem; */
     width: 100%;
     aspect-ratio: 1/1;
     object-fit: cover;
@@ -171,13 +161,28 @@ div.popup .infos {
     border: 3px solid rgba(0, 0, 0, 1);
     font-size: 2rem;
     margin-bottom: 2rem;
+    position: absolute;
+    right: 0;
 }
 .popup .mobileButton {
     display: none;
 }
 
-/* style input file*/
+.loadMore {
+    display: flex;
+    justify-content: center;
+}
+.loadMore button {
+    padding: 0.5rem 2rem;
+    border: none;
+    border-radius: 5px;
+}
+.loadMore button:hover {
+    cursor: pointer;
+    color: #ff7b47;
+}
 
+/* style input file*/
 .inputfile {
     width: 0.1px;
     height: 0.1px;
@@ -209,55 +214,6 @@ div.popup .infos {
     font-style: italic;
 }
 
-/* Toggle */
-
-input[type="checkbox"].switch {
-    height: 0;
-    width: 0;
-    visibility: hidden;
-}
-
-label.toggle {
-    cursor: pointer;
-    text-indent: -9999px;
-    width: 50px;
-    height: 30px;
-    background: grey;
-    display: block;
-    border-radius: 100px;
-    position: relative;
-}
-
-label.toggle:after {
-    content: "";
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    width: 20px;
-    height: 20px;
-    background: #fff;
-    border-radius: 90px;
-    /* transition: 0.3s; */
-}
-
-input.switch:checked + label {
-    background: #ffffff;
-    border: 1px solid #000;
-}
-
-input.switch:checked + label:after {
-    left: calc(100% - 5px);
-    transform: translateX(-100%);
-    background-color: transparent;
-    box-shadow: 6px 6px #000;
-    top: -2px;
-    left: 38px;
-}
-
-/* label.toggle:active:after {
-    width: 30px;
-} */
-
 @media screen and (max-width: 1200px) {
 }
 @media screen and (max-width: 992px) {
@@ -271,7 +227,6 @@ input.switch:checked + label:after {
     }
     .popup .mobileButton {
         display: block;
-        margin-left: auto;
         width: 2.5rem;
         height: 2.5rem;
         position: absolute;
@@ -281,6 +236,9 @@ input.switch:checked + label:after {
     }
     .popup .desktopButton {
         display: none;
+    }
+    .inputfile + label {
+        margin: 1rem 0;
     }
 }
 @media screen and (max-width: 768px) {
@@ -296,14 +254,8 @@ input.switch:checked + label:after {
         width: 100%;
     }
     .popup .mobileButton {
-        display: block;
-        margin-left: auto;
-        width: 2.5rem;
-        height: 2.5rem;
-        position: absolute;
-        top: 3rem;
+        top: 2.5rem;
         left: 3rem;
-        z-index: 2;
     }
     .popup .desktopButton {
         display: none;
@@ -318,9 +270,13 @@ input.switch:checked + label:after {
         height: auto;
     }
     form {
-        grid-template-rows: repeat(5, 4rem);
-        gap: 0;
+        /* grid-template-rows: repeat(5, 4rem);
+        gap: 0; */
+
+        grid-template-rows: auto;
+        gap: 0.5rem;
     }
+
     form div {
         display: flex;
         flex-direction: column;
@@ -339,14 +295,12 @@ input.switch:checked + label:after {
         gap: 0;
     }
     .popup .mobileButton {
-        display: block;
-        margin-left: auto;
-        width: 2.5rem;
-        height: 2.5rem;
+        width: 2rem;
+        height: 2rem;
         position: absolute;
-        top: 3rem;
-        left: 3rem;
-        z-index: 2;
+        top: 1.5rem;
+        left: 2.5rem;
+        font-size: 1.5rem;
     }
     .popup .desktopButton {
         display: none;

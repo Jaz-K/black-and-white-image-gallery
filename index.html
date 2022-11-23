@@ -5,31 +5,30 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="/css/style.css">
-    <title>Image Board</title>
+    <script src="https://kit.fontawesome.com/1261be64f6.js" crossorigin="anonymous"></script>
+    <title>Black & White</title>
 </head>
 
 <body>
     <header>
         <img class="logo" src="/assets/blackandwhitelogo.svg" alt="beauty in black and white">
-        <input type="checkbox" id="switch" class="switch" /><label for="switch" class="toggle">Toggle</label>
     </header>
     <main id="main">
         <popup v-if="selectedImageId" :id="selectedImageId" @close="handleClosePopup"></popup>
-        <!-- <comments :id="selectedImageId"></comments> -->
-        <h1>{{ headline }}</h1>
+
         <section>
             <form @submit.prevent.default="handleSubmit">
                 <div>
                     <label for="title">Title</label>
-                    <input v-model="title" type="text" name="title" id="title" required>
+                    <input v-model="title" type="text" name="title" id="title" required maxlength="20">
                 </div>
                 <div>
                     <label for="username">Username</label>
-                    <input v-model="username" type="text" name="username" id="username" required>
+                    <input v-model="username" type="text" name="username" id="username" required maxlength="20">
                 </div>
                 <div class="inputDescription">
                     <label for="description">Description</label>
-                    <input v-model="description" type="text" name="description" id="description" required>
+                    <input v-model="description" type="text" name="description" id="description" maxlength="40">
                 </div>
 
                 <input type="file" name="image" id="image" accept="image/*" @change="handleChange" class="inputfile"
@@ -43,11 +42,10 @@
             <ul>
                 <li v-for="image of images" key="image.id" @click="handleImageClick(image.id)">
                     <img v-bind:src="image.url" class="imageGallery bw-img" :alt="image.title">
-
                     {{image.title}}
                 </li>
             </ul>
-            <div>
+            <div class="loadMore">
                 <button v-if="button" @click="handleMoreImages">load more</button>
             </div>
         </section>

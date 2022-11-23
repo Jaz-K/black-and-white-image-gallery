@@ -13,7 +13,7 @@ Vue.createApp({
             description: "",
             image: null,
             selectedImageId: null,
-            headline: "This is a gallery",
+            // headline: "This is a gallery",
             button: true,
         };
     },
@@ -21,9 +21,11 @@ Vue.createApp({
         // console.log("mounted check");
         const response = await fetch("/api/images");
         const data = await response.json();
-        console.log("image data first load", data);
         this.images = data;
-        // console.log("user", this.images);
+        /////////////
+        this.selectedImageId = window.location.hash.slice(1);
+        console.log("mounted", this.image);
+        ////////////
     },
     methods: {
         async handleMoreImages() {
@@ -41,11 +43,16 @@ Vue.createApp({
             }
         },
         handleClosePopup() {
+            window.history.pushState({}, "", `/`);
             this.selectedImageId = null;
         },
-        handleImageClick(image) {
-            console.log("handle CLick test", image);
+        async handleImageClick(image) {
+            console.log("handle CLick image", image);
             this.selectedImageId = image;
+
+            ////////
+            window.history.pushState({}, "", `/#${this.image}`);
+            ///////////
         },
         handleChange(event) {
             event.preventDefault();

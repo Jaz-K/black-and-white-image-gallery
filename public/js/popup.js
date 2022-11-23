@@ -20,6 +20,12 @@ const Popup = {
         // console.log("imageId", this.imageId);
         const response = await fetch("/api/" + this.id);
         const data = await response.json();
+        ///////
+        if (!data) {
+            this.$emit("close");
+            return;
+        }
+        ////////
         this.image = data;
     },
     methods: {

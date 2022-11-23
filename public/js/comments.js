@@ -54,6 +54,7 @@ const Comments = {
             <p class="comment">{{comment.comment}}</p>
         </li>
     </ul>
+    
     `,
 };
 
