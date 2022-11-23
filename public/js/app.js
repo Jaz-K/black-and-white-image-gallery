@@ -31,9 +31,7 @@ Vue.createApp({
             const data = await response.json();
             console.log("data", data);
 
-            if (data.id == data.lowestId) {
-                console.log(data);
-
+            if (data.id === data.lowestId) {
                 this.button = false;
             }
             this.images = [...this.images, ...data];
