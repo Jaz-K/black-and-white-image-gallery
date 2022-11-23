@@ -13,7 +13,6 @@ Vue.createApp({
             description: "",
             image: null,
             selectedImageId: null,
-            // headline: "This is a gallery",
             button: true,
         };
     },
@@ -22,9 +21,6 @@ Vue.createApp({
         const response = await fetch("/api/images");
         const data = await response.json();
         this.images = data;
-        /////////////
-        // this.selectedImageId = window.location.hash.slice(1);
-        ////////////
     },
     methods: {
         async handleMoreImages() {
@@ -48,7 +44,6 @@ Vue.createApp({
         handleImageClick(image) {
             console.log("handle CLick image", image);
             this.selectedImageId = image;
-
             ////////
             window.history.pushState({}, "", `/#${image}`);
             ///////////

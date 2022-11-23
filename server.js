@@ -5,7 +5,7 @@ const uidSafe = require("uid-safe");
 require("dotenv").config();
 // const uploader = require("./upload");
 const { AWS_BUCKET } = process.env;
-const s3upload = require("./s3");
+const { s3upload, s3delete } = require("./s3");
 
 const app = express();
 
@@ -17,6 +17,8 @@ const {
     getCommentsById,
     addComment,
     loadImagesByClick,
+    deleteImage,
+    deleteComments,
 } = require("./db");
 
 const diskStorage = multer.diskStorage({
@@ -65,11 +67,9 @@ app.post("/upload", uploader.single("image"), s3upload, async (req, res) => {
 
 // images by ID
 app.get("/api/:id", async (req, res) => {
-    // console.log("req params", req.params);
     const id = req.params.id;
     const image = await getImageById(id);
     res.json(image);
-    // console.log("image", image);
 });
 
 // comments by ID
@@ -82,8 +82,6 @@ app.get("/api/comments/:id", async (req, res) => {
 
 // add comment
 app.post("/api/comment", async (req, res) => {
-    console.log("this is a post request");
-    console.log("req.body", req.body);
     await addComment({ ...req.body });
     res.status(200).end();
 });
@@ -100,9 +98,18 @@ app.get("/api/loadImages/:lastImageId", async (req, res) => {
 
 // DELETE from AWS
 
-/* app.post("/delete", async (req, res) => {
-
-}) */
+app.post("/api/delete", async (req, res) => {
+    try {
+        console.log("relete body", req.body);
+        const { fileName, image_id } = req.body;
+        await deleteImage(image_id);
+        await deleteComments(image_id);
+        await s3delete(fileName);
+        res.status(200).end();
+    } catch (error) {
+        console.log("Something went wrong while delete", error);
+    }
+});
 
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "index.html"));

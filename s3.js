@@ -51,4 +51,25 @@ function s3upload(request, response, next) {
         });
 }
 
-module.exports = s3upload;
+async function s3delete(file) {
+    const params = {
+        Bucket: Bucket,
+        Key: file, //if any sub folder-> path/of/the/folder.ext
+    };
+    try {
+        await s3.headObject(params).promise();
+        console.log("File Found in S3");
+        try {
+            await s3.deleteObject(params).promise();
+            console.log("file deleted Successfully");
+        } catch (err) {
+            console.log("ERROR in file Deleting : " + JSON.stringify(err));
+        }
+    } catch (err) {
+        console.log("File not Found ERROR : " + err.code);
+    }
+}
+module.exports = {
+    s3upload,
+    s3delete,
+};

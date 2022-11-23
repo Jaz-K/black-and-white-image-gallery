@@ -16,19 +16,30 @@ const Popup = {
         },
     },
     mounted: async function () {
-        // console.log("fetch ID", this.id);
-        // console.log("imageId", this.imageId);
         const response = await fetch("/api/" + this.id);
         const data = await response.json();
-        ///////
         if (!data) {
             this.$emit("close");
             return;
         }
-        ////////
         this.image = data;
     },
     methods: {
+        handleDeleteClick() {
+            console.log("image", this.image.url.slice(36));
+            console.log("delete click");
+            fetch("/api/delete", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    fileName: this.image.url.slice(36),
+                    image_id: this.id,
+                }),
+            });
+            this.$emit("close");
+        },
         handleCloseClick() {
             this.$emit("close");
             console.log("closeClick test");
@@ -45,8 +56,8 @@ const Popup = {
                     <button @click="handleCloseClick" class="closeButton desktopButton">×</button>
                     <h2>{{ image.title }}</h2>
                     <h3>Posted by: {{ image.username }}</h3>
-
                     <p>Description: {{ image.description}}</p>
+                    <button @click="handleDeleteClick">DELETE</button>
                     <comments :id="imageId"></comments>
                 </section>
             </div>

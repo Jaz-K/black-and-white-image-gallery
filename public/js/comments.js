@@ -36,7 +36,7 @@ const Comments = {
         },
     },
     template: `
-    <h2>Add a comment</h2>
+    <h3>Add a comment</h3>
     <form @submit.prevent.default="handleSubmitComment">
         <div>
         <label for="username">Usernames</label>

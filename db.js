@@ -84,6 +84,14 @@ async function loadImagesByClick(id) {
     return result.rows;
 }
 
+//delete image and comments
+function deleteImage(id) {
+    return db.query(`DELETE FROM images WHERE id = $1`, [id]);
+}
+function deleteComments(image_id) {
+    return db.query(`DELETE FROM comments WHERE image_id = $1`, [image_id]);
+}
+
 module.exports = {
     getImages,
     getImageById,
@@ -91,4 +99,6 @@ module.exports = {
     getCommentsById,
     addComment,
     loadImagesByClick,
+    deleteImage,
+    deleteComments,
 };
