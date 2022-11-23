@@ -10,9 +10,7 @@ html {
     font-family: "droid_serifregular", "Times New Roman", Times, serif;
     font-size: 16px;
 }
-/* body {
-    background-color: rgb(34, 34, 34);
-} */
+
 header {
     max-width: 1340px;
     margin: 0 auto;
@@ -121,6 +119,8 @@ form label {
 }
 
 form button {
+    background-color: #000;
+    color: #0e7c7c;
     font-family: inherit;
     padding: 5px 20px;
     border: none;
@@ -130,7 +130,7 @@ form button {
 }
 
 form button:hover {
-    background-color: #ff7b47;
+    color: #42bebe;
 }
 section {
     position: relative;
@@ -176,14 +176,25 @@ div.popup .infos {
     display: flex;
     justify-content: center;
 }
-.loadMore button {
+
+/* btn style  */
+.loadMore button,
+.btn-style {
+    font-family: inherit;
+    font-size: 1.25rem;
     padding: 0.5rem 2rem;
     border: none;
-    border-radius: 5px;
+    border-radius: 0.25rem;
+    background-color: #000;
+    color: #0e7c7c;
+    transition: transform 0.2s;
 }
-.loadMore button:hover {
+.loadMore button:hover,
+.btn-style:hover {
     cursor: pointer;
-    color: #ff7b47;
+    color: #42bebe;
+    -webkit-transform: translateY(-0.125rem);
+    transform: translateY(-0.125rem);
 }
 
 /* style input file*/

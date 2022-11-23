@@ -3,7 +3,7 @@ const express = require("express");
 const multer = require("multer");
 const uidSafe = require("uid-safe");
 require("dotenv").config();
-// const uploader = require("./upload");
+// const uploader = require("./api/upload");
 const { AWS_BUCKET } = process.env;
 const { s3upload, s3delete } = require("./s3");
 
@@ -50,20 +50,25 @@ app.get("/api/images", async (req, res) => {
     res.json(images);
 });
 
-app.post("/upload", uploader.single("image"), s3upload, async (req, res) => {
-    // console.log("req.body: ", req.body);
-    // console.log("req.file: ", req.file);
-    const url = `https://s3.amazonaws.com/${AWS_BUCKET}/${req.file.filename}`;
-    const image = await addImage({ url, ...req.body });
+app.post(
+    "/api/upload",
+    uploader.single("image"),
+    s3upload,
+    async (req, res) => {
+        // console.log("req.body: ", req.body);
+        // console.log("req.file: ", req.file);
+        const url = `https://s3.amazonaws.com/${AWS_BUCKET}/${req.file.filename}`;
+        const image = await addImage({ url, ...req.body });
 
-    if (req.file) {
-        res.json(image);
-    } else {
-        res.json({
-            success: false,
-        });
+        if (req.file) {
+            res.json(image);
+        } else {
+            res.json({
+                success: false,
+            });
+        }
     }
-});
+);
 
 // images by ID
 app.get("/api/:id", async (req, res) => {

@@ -39,6 +39,8 @@ const Popup = {
                 }),
             });
             this.$emit("close");
+            this.$emit("delete", this.imageId);
+            // window.location.reload();
         },
         handleCloseClick() {
             this.$emit("close");
@@ -53,11 +55,11 @@ const Popup = {
                     <img :src="image.url" class="bw-img"/>
                 </section>
                 <section>
-                    <button @click="handleCloseClick" class="closeButton desktopButton">×</button>
+                    <button @click="handleCloseClick" class="btn-style closeButton desktopButton">×</button>
                     <h2>{{ image.title }}</h2>
                     <h3>Posted by: {{ image.username }}</h3>
                     <p>Description: {{ image.description}}</p>
-                    <button @click="handleDeleteClick">DELETE</button>
+                    <button class="btn-style" @click="handleDeleteClick">DELETE</button>
                     <comments :id="imageId"></comments>
                 </section>
             </div>

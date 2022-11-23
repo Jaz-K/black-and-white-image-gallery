@@ -37,6 +37,9 @@ Vue.createApp({
                 this.button = false;
             }
         },
+        handleDeleteImage(imageId) {
+            this.images = this.images.filter((x) => x.id !== imageId);
+        },
         handleClosePopup() {
             window.history.pushState({}, "", `/`);
             this.selectedImageId = null;
@@ -44,9 +47,7 @@ Vue.createApp({
         handleImageClick(image) {
             console.log("handle CLick image", image);
             this.selectedImageId = image;
-            ////////
             window.history.pushState({}, "", `/#${image}`);
-            ///////////
         },
         handleChange(event) {
             event.preventDefault();
@@ -64,7 +65,7 @@ Vue.createApp({
             formData.append("username", this.username);
             formData.append("description", this.description);
 
-            const response = await fetch("/upload", {
+            const response = await fetch("/api/upload", {
                 method: "POST",
                 body: formData,
             });

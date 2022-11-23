@@ -14,7 +14,8 @@
         <img class="logo" src="/assets/blackandwhitelogo.svg" alt="beauty in black and white">
     </header>
     <main id="main">
-        <popup v-if="selectedImageId" :id="selectedImageId" @close="handleClosePopup"></popup>
+        <popup v-if="selectedImageId" :id="selectedImageId" @close="handleClosePopup" @delete="handleDeleteImage">
+        </popup>
 
         <section>
             <form @submit.prevent.default="handleSubmit">
@@ -45,6 +46,7 @@
                     {{image.title}}
                 </li>
             </ul>
+            <i class="fa-regular fa-trash-can"></i>
             <div class="loadMore">
                 <button v-if="button" @click="handleMoreImages">load more</button>
             </div>
