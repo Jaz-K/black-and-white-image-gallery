@@ -23,8 +23,7 @@ Vue.createApp({
         const data = await response.json();
         this.images = data;
         /////////////
-        this.selectedImageId = window.location.hash.slice(1);
-        console.log("mounted", this.image);
+        // this.selectedImageId = window.location.hash.slice(1);
         ////////////
     },
     methods: {
@@ -46,12 +45,12 @@ Vue.createApp({
             window.history.pushState({}, "", `/`);
             this.selectedImageId = null;
         },
-        async handleImageClick(image) {
+        handleImageClick(image) {
             console.log("handle CLick image", image);
             this.selectedImageId = image;
 
             ////////
-            window.history.pushState({}, "", `/#${this.image}`);
+            window.history.pushState({}, "", `/#${image}`);
             ///////////
         },
         handleChange(event) {
