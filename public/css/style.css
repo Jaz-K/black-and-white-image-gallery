@@ -121,8 +121,8 @@ form input {
 }
 form input:focus-visible {
     outline: none;
-    border-bottom: #0e7c7c 1px solid;
-    caret-color: #0e7c7c;
+    border-bottom: #8f8f8f 1px solid;
+    caret-color: #8f8f8f;
 }
 form label {
     font-size: 0.75rem;
