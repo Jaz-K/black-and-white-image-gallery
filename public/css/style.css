@@ -52,7 +52,7 @@ img.logo {
     height: 100px;
 }
 
-.bw-img {
+img.bw-img {
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
 }
@@ -68,11 +68,12 @@ ul {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
     grid-template-rows: auto;
-    gap: 4% 2%;
+    gap: 0 2%;
     margin-bottom: 4rem;
 }
 li.imageList,
 li.comments {
+    margin-bottom: 1.5rem;
     display: flex;
     flex-direction: column;
     background-color: #eeeeee;
@@ -80,6 +81,11 @@ li.comments {
     font-weight: bolder;
     transition: transform 0.2s;
     border-radius: 4px;
+}
+.comment {
+    font-family: robotoitalic, Arial, Helvetica, sans-serif;
+    font-style: italic;
+    font-weight: 400;
 }
 
 li.imageList:hover {
@@ -169,6 +175,7 @@ div.popup .infos {
     margin-bottom: 2rem;
     position: absolute;
     right: 0;
+    cursor: pointer;
 }
 .popup .mobileButton {
     display: none;
@@ -187,17 +194,14 @@ div.popup .infos {
     font-size: 1.25rem;
     font-weight: 400;
     padding: 0.5rem 2rem;
-    border: none;
+    border: 1px solid #000;
     border-radius: 0.25rem;
-    background-color: #000;
-    color: #0e7c7c;
+    background-color: rgb(255, 255, 255);
+    color: #000;
     transition: transform 0.2s;
     margin: 1rem 0;
     height: 40px;
-}
-.delete {
-    margin-left: auto;
-    display: block;
+    line-height: 1.25rem;
 }
 
 .btn-style:hover,
@@ -206,11 +210,29 @@ div.popup .infos {
 .inputfile + label:hover {
     outline: none;
     cursor: pointer;
-    color: #42bebe;
+    background-color: #000;
+    color: #ffffff;
     -webkit-transform: translateY(-0.125rem);
     transform: translateY(-0.125rem);
 }
 
+.delete {
+    margin-left: auto;
+    display: block;
+}
+button.deleteIcon {
+    height: 20px;
+    padding: 1rem;
+    background-image: url("../assets/bin.svg");
+    background-origin: padding-box;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 0.5rem solid #fff;
+}
+button.deleteIcon:hover {
+    background-image: url("../assets/bin_white.svg");
+    border: 0.5rem solid #000;
+}
 /* style input file*/
 .inputfile {
     width: 0.1px;
@@ -220,36 +242,30 @@ div.popup .infos {
     position: absolute;
     z-index: -1;
 }
-.comment {
-    font-family: robotoitalic, Arial, Helvetica, sans-serif;
-    font-style: italic;
-}
 
 @media screen and (max-width: 1300px) {
-    form {
+    form.uploadForm {
         grid-template-columns: repeat(3, minmax(14rem, 1fr));
-        gap: 4% 2%;
     }
 }
 @media screen and (max-width: 992px) {
-    form {
+    form.uploadForm {
         grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
-        gap: 4% 2%;
     }
     div.popup .infos {
         grid-template-columns: repeat(1, minmax(16rem, 1fr));
         grid-template-rows: auto;
         gap: 0%;
     }
-    button {
+    /* button {
         margin: 1rem 0;
-    }
+    } */
     .popup .mobileButton {
         display: block;
         width: 2.5rem;
         height: 2.5rem;
         position: absolute;
-        top: 4rem;
+        top: 5rem;
         left: 5rem;
         z-index: 2;
     }
@@ -273,14 +289,14 @@ div.popup .infos {
         width: 100%;
     }
     .popup .mobileButton {
-        top: 2.5rem;
+        top: 3rem;
         left: 3rem;
     }
     .popup .desktopButton {
         display: none;
     }
     ul {
-        gap: 2% 3%;
+        gap: 0 3%;
     }
 }
 @media screen and (max-width: 576px) {
@@ -298,9 +314,6 @@ div.popup .infos {
         flex-direction: column;
     }
 
-    ul {
-        gap: 1% 0;
-    }
     img.imageGallery {
         width: 100%;
     }
@@ -314,7 +327,7 @@ div.popup .infos {
         width: 2rem;
         height: 2rem;
         position: absolute;
-        top: 1.5rem;
+        top: 2.5rem;
         left: 2.5rem;
         font-size: 1.5rem;
     }

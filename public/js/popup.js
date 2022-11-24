@@ -40,7 +40,6 @@ const Popup = {
             });
             this.$emit("close");
             this.$emit("delete", this.imageId);
-            // window.location.reload();
         },
         handleCloseClick() {
             this.$emit("close");
@@ -58,8 +57,8 @@ const Popup = {
                     <button @click="handleCloseClick" class="closeButton desktopButton">×</button>
                     <h2>{{ image.title }}</h2>
                     <h3>Posted by: {{ image.username }}</h3>
-                    <p>Description: {{ image.description}}</p>
-                    <button class="btn-style delete" @click="handleDeleteClick">DELETE</button>
+                    <p v-if="image.description">Description: {{ image.description}}</p>
+                    <button class="btn-style delete deleteIcon" @click="handleDeleteClick"></button>
                     <comments :id="imageId"></comments>
                 </section>
             </div>

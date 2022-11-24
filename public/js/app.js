@@ -21,17 +21,17 @@ Vue.createApp({
         const response = await fetch("/api/images");
         const data = await response.json();
         this.images = data;
-        this.imageId = window.location.hash.slice(1);
+        this.selectedImageId = window.location.hash.slice(1);
     },
     methods: {
         async handleMoreImages() {
             const lastImage = this.images[this.images.length - 1].id;
-
+            console.log("lastImage", this.images[this.images.length - 1].id);
             const response = await fetch("/api/loadImages/" + lastImage);
             const data = await response.json();
-            console.log("data", data);
 
-            if (data.id === data.lowestId) {
+            console.log("lastImage", this.images[this.images.length - 1].id);
+            if (data[data.length - 1].id === data[data.length - 1].lowestId) {
                 this.button = false;
             }
             this.images = [...this.images, ...data];
